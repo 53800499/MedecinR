@@ -12,13 +12,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $apprenant = $data['apprenant'];
     $groupeSanguin = $data['groupeSanguin'];
     $taille = $data['taille'];
+    $nom = $data['nom'];
+    $anneEtude = $data['anneEtude'];
+    $filiere = $data['filiere'];
     $poids = $data['poids'];
     $conditionsMedicales = json_encode($data['conditionsMedicales']);
 
     try {
         // Insérer dans la table apprenant
-        $stmt = $pdo->prepare("INSERT INTO apprenant (apprenant, groupe_sanguin, taille, poids, conditions_medicales) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$apprenant, $groupeSanguin, $taille, $poids, $conditionsMedicales]);
+        $stmt = $pdo->prepare("INSERT INTO apprenant (apprenant, nom, filiere, anneEtude, groupe_sanguin, taille, poids, conditions_medicales) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$apprenant, $nom, $filiere, $anneEtude, $groupeSanguin, $taille, $poids, $conditionsMedicales]);
         $apprenantId = $pdo->lastInsertId();
 
         // Récupération des données "Visite"

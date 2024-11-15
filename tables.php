@@ -6,6 +6,9 @@ try {
     $sqlApprenant = "CREATE TABLE IF NOT EXISTS apprenant (
         id INT AUTO_INCREMENT PRIMARY KEY,
         apprenant VARCHAR(50),
+        nom VARCHAR(50),
+        filiere VARCHAR(50),
+        anneEtude VARCHAR(50),
         groupe_sanguin VARCHAR(5),
         taille FLOAT,
         poids FLOAT,
