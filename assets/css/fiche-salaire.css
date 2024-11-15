@@ -1,0 +1,26 @@
+body{
+    font-family: 'Arial', sans-serif;
+}
+
+.school-name{
+    font-size: 40px;
+    font-weight: 800;
+}
+
+.doc-name{
+    font-weight: 600;
+    color: #9e0b0f;
+}
+
+.table-title{
+    font-weight: 700;
+    font-style: italic;
+}
+
+.table-carte-title{
+    font-weight: 700;
+}
+
+tr,th,td{
+    border: 1px solid #ced4da !important;
+}

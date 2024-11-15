@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 18px;
+}
+
+header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+header a img{
+    width: 100px;
+}
+
+header ul{
+    text-align: center;
+    list-style: none;
+}
+header ul li{
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.student-profil{
+    width: 100%;
+    display: flex;
+}
+
+.student-profil .student-img{
+    max-width: 15%;
+    flex: 0 0 15%;
+}
+
+.student-profil .student-img img{
+    width: 100%;
+}
+
+.student-profil .student-info{
+    max-width: 45%;
+    flex: 0 0 45%;
+    padding: 10px;
+}
+
+.student-profil .school-info{
+    max-width: 25%;
+    flex: 0 0 25%;
+    padding: 10px;
+}
+
+.student-profil .student-info ul,
+.student-profil .school-info ul
+{
+    list-style: none;
+    font-size: 18px;
+}
+
+.student-profil .student-info ul hr,
+.student-profil .school-info ul hr{
+    margin-bottom: 5px !important;
+}
+
+.doc-qr p{
+    font-size: 14px;
+}
+
+table th,
+table td{
+    border: 1px solid #333;
+    font-size: 16px;
+}
+
+table .title th{
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+table .state th,
+table tbody td{
+    font-family: sans-serif;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.bilan td,
+.result-an td,
+.appr td
+{
+    vertical-align: baseline;
+}
+
+table tbody td{
+    padding: .2rem .5rem !important;
+}
+
+.moy th,
+.bilan td,
+.trismestre th,
+.trismestre td,
+.bilan-classe th,
+.bilan-classe td
+{
+    text-align: left;
+    padding: .5rem .5rem;
+}
+
+.fixed-bottom{
+    font-size: 12px;
+    font-family: "Arial", sans-serif;
+}

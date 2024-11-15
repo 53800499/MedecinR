@@ -1,0 +1,38 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.infoline span{
+    border-top: 2px solid #146cc2;
+    padding-top: 5px;
+}
+
+th,td{
+    border: 1px solid #000 !important;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+tbody td{
+    padding: 5px !important;
+}
+
+a{
+    color: #146cc2 !important;
+}
+
+table thead th{
+    color:  white !important;
+}
+
+table tbody td{
+    color: #000 !important;
+}
+
+table tfoot td{
+    color: #fff !important;
+}
+
+.table>:not(:first-child){
+    border-top: #146cc2 !important;
+}
