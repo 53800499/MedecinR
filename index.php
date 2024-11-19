@@ -122,47 +122,45 @@
 
         
         <section class="comp-section">
-          <div class="row">
-            <?php
-            if ($result && $result->num_rows > 0) {
-                 while ($row = $result->fetch_assoc()) {
-                    // Récupérer les données de chaque étudiant
-                    $id = $row['id'];
-                    $nom = $row['nom'];
-                    $filiere = $row['filiere'];
-                    $annee = $row['anneEtude'];
-                    $group_sanguin = $row['groupe_sanguin'];
-                    $taille = $row['taille'];
-                    $poids = $row['poids'];
-                    // Vous pouvez ajouter d'autres informations ici comme la date de naissance, le contact d'urgence, etc.
-
-                    // Afficher chaque étudiant sous forme de carte
-                    echo "
-                    <div class='col-md-4'>
-                        <a href='#' class='card' data-bs-toggle='modal' data-bs-target='#activites_$id'>
-                            <div class='card-body p-1'>
-                                <ul class='list-group list-group-flush'>
-                                    <li class='list-group-item d-flex justify-content-between'>
-                                        <div class='d-flex'>
-                                            <h1 class='me-3'><i class='far fa-file'></i></h1>
-                                            <div>
-                                                <span class='d-block mb-2 fs-6 fw-bold'>$nom</span>
-                                                <span class='mb-0'>$annee année</span>
-                                                <span class='mb-0'><strong>$filiere</strong></span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </a>
+        <div class="row">
+    <?php 
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $id = $row['id'];
+            $nom = $row['nom'];
+            $filiere = $row['filiere'];
+            $annee = $row['anneEtude'];
+            $group_sanguin = $row['groupe_sanguin'];
+            $taille = $row['taille'];
+            $poids = $row['poids'];
+            
+            echo "
+            <div class='col-md-4'>
+                <a href='#' class='card' data-id='$id'data-nom='$nom' data-filiere='$filiere'data-annee='$annee' data-group-sanguin='$group_sanguin'
+                   data-taille='$taille' data-poids='$poids' onclick='showDetails(event)'>
+                    <div class='card-body p-1'>
+                        <ul class='list-group list-group-flush'>
+                            <li class='list-group-item d-flex justify-content-between'>
+                                <div class='d-flex'>
+                                    <h1 class='me-3'><i class='far fa-file'></i></h1>
+                                    <div>
+                                        <span class='d-block mb-2 fs-6 fw-bold'>$nom</span>
+                                        <span class='mb-0'>$annee année</span>
+                                        <span class='mb-0'><strong>$filiere</strong></span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    ";
-                }
-            } else {
-                echo "Aucun étudiant trouvé.";
-            }
-            ?>
-          </div>
+                </a>
+            </div>
+            ";
+        }
+    } else {
+        echo "Aucun étudiant trouvé.";
+    }
+    ?>
+</div>
         </section>
       </div>
     </div>
@@ -409,74 +407,277 @@
     </div>
   </div>
 
-  <?php
-// Générer un modal pour chaque étudiant
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        // Récupérer les données de chaque étudiant
-        $id = $row['id'];
-        $nom = $row['nom'];
-        $filiere = $row['filiere'];
-        $annee = $row['anneEtude'];
-        $group_sanguin = $row['groupe_sanguin'];
-        $taille = $row['taille'];
-        $poids = $row['poids'];
-
-        // Modal pour chaque étudiant
-        echo "
-        <div class='modal fade' id='activites_$id' tabindex='-1' aria-labelledby='activitesLabel_$id' aria-hidden='true'>
-            <div class='modal-dialog modal-dialog-centered modal-lg'>
-                <div class='modal-content'>
-                    <div class='modal-header'>
-                        <h5 class='modal-title' id='activitesLabel_$id'>Détails de l'étudiant - $nom</h5>
-                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                    </div>
-                    <div class='modal-body'>
-                        <div class='comp-section'>
-                            <div class='row'>
-                                <div class='col-lg-12'>
-                                    <ul class='list-group list-group-flush'>
-                                        <li class='list-group-item d-flex justify-content-between'>
-                                            <p><span class='mb-0 fs-6 fw-bold'>Nom :</span> $nom</p>
-                                        </li>
-                                        <li class='list-group-item d-flex justify-content-between'>
-                                            <p><span class='mb-0 fs-6 fw-bold'>Filière :</span> $filiere</p>
-                                        </li>
-                                        <li class='list-group-item d-flex justify-content-between'>
-                                            <p><span class='mb-0 fs-6 fw-bold'>Année :</span> $annee</p>
-                                        </li>
-                                        <li class='list-group-item d-flex justify-content-between'>
-                                            <p><span class='mb-0 fs-6 fw-bold'>Age :</span> $age ans</p>
-                                        </li>
-                                        <li class='list-group-item d-flex justify-content-between'>
-                                            <p><span class='mb-0 fs-6 fw-bold'>Adresse :</span> $adresse</p>
-                                        </li>
-                                        <li class='list-group-item d-flex justify-content-between'>
-                                            <p><span class='mb-0 fs-6 fw-bold'>Sexe :</span> $sexe</p>
-                                        </li>
-                                        <li class='list-group-item d-flex justify-content-between'>
-                                            <p><span class='mb-0 fs-6 fw-bold'>Groupe Sanguin :</span> $group_sanguin</p>
-                                        </li>
-                                        <li class='list-group-item d-flex justify-content-between'>
-                                            <p><span class='mb-0 fs-6 fw-bold'>Taille :</span> $taille cm</p>
-                                        </li>
-                                        <li class='list-group-item d-flex justify-content-between'>
-                                            <p><span class='mb-0 fs-6 fw-bold'>Poids :</span> $poids kg</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <!-- <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailsModalLabel">Détails de l'étudiant</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul id="modalDetails">
+                    /* Les détails de l'étudiant seront insérés ici */
+                </ul>
             </div>
         </div>
-        ";
-    }
+    </div>
+</div> -->
+
+  <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Activités de la structure</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="comp-section">
+            <ul class="nav nav-tabs nav-tabs-solid">
+              <li class="nav-item"><a class="nav-link active" href="#solid-tab3" data-bs-toggle="tab">Info Personnel</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="#solid-tab4" data-bs-toggle="tab">Visite</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane show active" id="solid-tab3">
+                <div class="row">
+                  <div class="col-lg-2">
+                    <div class="avatar avatar-xxl">
+                      <img class="avatar-img rounded-3" alt="User Image" src="assets/img/profiles/avatar-02.jpg">
+                    </div>
+                  </div>
+                  <div class="col-lg-5">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between">
+                          <p><span class="mb-0 fs-6 fw-bold">Mr/Mme/Mlle </span><span id="nomR"> </span></p>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                          <p><span class="mb-0 fs-6 fw-bold">Age</span><span id="age"> </span># ans</p>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                          <p><span class="mb-0 fs-6 fw-bold">Adresse </span> city-name, country</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-lg-5">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between">
+                        <div>
+                          <span class="d-block mb-0 fs-6 fw-bold">Sexe :</span>
+                          <span class="mb-0">Masculin</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-12">
+                    <div class="table-responsive">
+                      <table class="table table-striped mt-3">
+                        <thead>
+                          <tr class="table-info">
+                            <th scope="col">Groupe Sanguin</th>
+                            <th scope="col">Taille</th>
+                            <th scope="col">Poid</th>
+                            <th scope="col">Date de Naissance</th>
+                            <th scope="col">Adresse</th>
+                            <th scope="col">Nom du Père</th>
+                            <th scope="col">Nom de la Mère</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">ABO+</th>
+                            <td>0#cm</td>
+                            <td>0#.0#Kg</td>
+                            <td>00/00/20##</td>
+                            <td>Quartier - Ville - Pays</td>
+                            <td>Nom du Père</td>
+                            <td>Nom de la Mère</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-12">
+                    <h4 class="m-0">Condition médicale</h4>
+                    <ul class="list-group">
+                      <li class="list-group-item">An item</li>
+                      <li class="list-group-item">A second item</li>
+                      <li class="list-group-item">A third item</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-12">
+                    <h4 class="m-0">Médicament actuelle</h4>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr class="table-success">
+                            <th scope="col">N°</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Postologie </th>
+                            <th scope="col">Fréquence</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">0#</th>
+                            <td>Name</td>
+                            <td>-----</td>
+                            <td>-----</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-12">
+                    <h4 class="m-0">Allergies</h4>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr class="table-danger">
+                            <th scope="col">N°</th>
+                            <th scope="col">Réaction</th>
+                            <th scope="col">Type</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">0#</th>
+                            <td>Polaine</td>
+                            <td>Environnemental</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-12">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between">
+                        <div>
+                          <span class="mb-0 fs-6 fw-bold">Personne à contacté en cas d'urgence :</span>
+                          <span class="mb-0">Sa Mère </span>
+                        </div>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <div>
+                          <span class="mb-0 fs-6 fw-bold">Médécin traitant :</span>
+                          <span class="mb-0">John Doe </span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-12">
+                    <h4 class="m-0">Autorisations Médicales</h4>
+                    <ul class="list-group">
+                      <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                          <div class="fw-bold">Autorisation pour administrer des médicaments (le cas échéantbheading)
+                          </div>
+                        </div>
+                        <span class="badge bg-primary rounded-pill">Oui</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                          <div class="fw-bold">Autorisation pour transporter l'apprenant à l'hôpital en cas d'urgence
+                          </div>
+                        </div>
+                        <span class="badge bg-danger rounded-pill">Non</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                          <div class="fw-bold">Autorisation pour consulter le médecin traitant de l'apprenant en cas de
+                            besoin </div>
+                        </div>
+                        <span class="badge bg-primary rounded-pill">Oui</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="solid-tab4">
+                <table class="table table-striped mt-3">
+                  <thead>
+                    <tr>
+                      <th scope="col">N°</th>
+                      <th scope="col">Etabilssement</th>
+                      <th scope="col">Date d'entrée</th>
+                      <th scope="col">Date de sortie</th>
+                      <th scope="col">Médécin</th>
+                      <th scope="col" class="text-end">Etat de Santé</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">0#</th>
+                      <td>--------</td>
+                      <td>00/00/20## 00:00</td>
+                      <td>00/00/20## 00:00</td>
+                      <td>Medecin-1</td>
+                      <td class="text-end">
+                        State-Name
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<script>
+  function showDetails(event) {
+    event.preventDefault();
+
+    // Récupérer l'élément cliqué et ses données
+    const card = event.currentTarget;
+    const id = card.getAttribute('data-id');
+    const nom = card.getAttribute('data-nom');
+    const filiere = card.getAttribute('data-filiere');
+    const annee = card.getAttribute('data-annee');
+    const groupSanguin = card.getAttribute('data-group-sanguin');
+    const taille = card.getAttribute('data-taille');
+    const poids = card.getAttribute('data-poids');
+    console.log(nom);
+    
+
+    // Construire les détails pour le modal
+    const modalDetails = `
+        <li>Nom : ${nom}</li>
+        <li>Filière : ${filiere}</li>
+        <li>Année : ${annee}</li>
+        <li>Groupe Sanguin : ${groupSanguin}</li>
+        <li>Taille : ${taille} cm</li>
+        <li>Poids : ${poids} kg</li>
+    `;
+
+    // Insérer les détails dans le modal
+    //document.getElementById('modalDetails').innerHTML = modalDetails;
+    document.getElementById('nomR').textContent = nom;
+    document.getElementById('filiere').textContent = filiere;
+
+    // Afficher le modal
+    const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+    modal.show();
 }
-?>
 
-
+</script>
 
   <script src="assets/js/jquery-3.6.0.min.js"></script>
 
