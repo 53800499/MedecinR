@@ -486,7 +486,8 @@
                             <th scope="col">Nom de la Mère</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
+                          <!-- 
                           <tr>
                             <th scope="row">ABO+</th>
                             <td>0#cm</td>
@@ -495,7 +496,7 @@
                             <td>Quartier - Ville - Pays</td>
                             <td>Nom du Père</td>
                             <td>Nom de la Mère</td>
-                          </tr>
+                          </tr> -->
                         </tbody>
                       </table>
                     </div>
@@ -655,8 +656,11 @@
     const taille = card.getAttribute('data-taille');
     const poids = card.getAttribute('data-poids');
     console.log(nom);
+    console.log(groupSanguin);
+    console.log(taille);
+    console.log(poids);
     
-
+    /* 
     // Construire les détails pour le modal
     const modalDetails = `
         <li>Nom : ${nom}</li>
@@ -665,10 +669,22 @@
         <li>Groupe Sanguin : ${groupSanguin}</li>
         <li>Taille : ${taille} cm</li>
         <li>Poids : ${poids} kg</li>
-    `;
+    `; */
+    const ligneTable = `
+    <tr>
+                            <th scope="row">${groupSanguin}</th>
+                            <td>${taille}cm</td>
+                            <td>${poids}Kg</td>
+                            <td>00/00/20##</td>
+                            <td>Quartier - Ville - Pays</td>
+                            <td>Nom du Père</td>
+                            <td>Nom de la Mère</td>
+                          </tr>
+    `
 
     // Insérer les détails dans le modal
     //document.getElementById('modalDetails').innerHTML = modalDetails;
+    document.getElementById('tbody').innerHTML = ligneTable;
     document.getElementById('nomR').textContent = nom;
     document.getElementById('filiere').textContent = filiere;
 
